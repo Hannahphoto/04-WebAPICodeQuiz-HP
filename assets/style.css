@@ -1,0 +1,29 @@
+*{
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ;
+}
+
+nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 17px;
+    padding: 10px
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    text-align: center;
+    
+}
+
+button {
+    width: 90px;
+    height: 40px;
+    color:white;
+    background-color: purple;
+    margin: auto;
+    margin-top: 7px;
+}
+
