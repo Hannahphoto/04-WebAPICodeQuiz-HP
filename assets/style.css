@@ -24,6 +24,7 @@ button {
     color:white;
     background-color: purple;
     margin: auto;
-    margin-top: 7px;
+    margin-top: 10px;
+    cursor: pointer;
 }
 
