@@ -1,32 +1,33 @@
-//WHEN I click the start button
+// //WHEN I click the start button
 // THEN a timer starts and I am presented with a question
-// var timer = 60;
-var startquizBtn = document.querySelector("#startquiz");
+var starquizBtn = document.querySelector("#startquiz");
+var timerEl = document.getElementById("timer");
 
-// function startquiz(){
-//     timer.textcontent = " ";
-//     countdown;
-
-// }
-function displayMessage(){
-    
-
+function generateQuiz() {
+var timeLeft = 60;
+    var timeInterval = setInterval(function (){
+    timeLeft--;
+    timerEl.textContent = "Timer: " + timeLeft;
+    if(timeLeft <=0){
+        clearInterval(timeInterval)
+    }
+}, 1000);
 }
 
-function countdown (){
-    var timeleft = 60;
-    var timeInterval = setInterval (function(){
-        if(timeleft === 0){
-            clearInterval(timeInterval);
-            // timer.textcontent = " ";
-        }
-    timeleft = --;
-    timeleft.textcontent = timeleft
-    }, 1000);
+var quiz = "";
 
+function startquiz(){
+    quiz = generateQuiz();
 }
 
-startquizBtn.addEventListener("click", countdown);
+
+starquizBtn.addEventListener("click",startquiz)
+
+// var startquiz = setInterval(function(){
+//     var timeInterval
+// }    
+
+// startquizBtn.addEventListener("click", startquiz);
 
 // WHEN I answer a question
 // THEN I am presented with another question
