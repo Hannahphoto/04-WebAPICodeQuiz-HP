@@ -15,7 +15,10 @@ nav {
     flex-direction: column;
     /* justify-content: center; */
     text-align: center;
-    
+    display: block;
+    /* top: 400px;
+    bottom: 400px; */
+
 }
 
 button {
@@ -28,3 +31,19 @@ button {
     cursor: pointer;
 }
 
+#questiontitle{
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    text-align: center;
+    display: block;
+    font-size: 20px;
+    font-style: bold;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    height: 700px;
+    list-style-type: none;
+}
+
+#questiontitle ul{
+    list-style-type: none;
+}

@@ -24,3 +24,5 @@ THEN the game is over
 WHEN the game is over
 THEN I can save my initials and my score
 ```
+
+Sunday evening had help with ask bcs app, getting questions to appear and direction on how to get page to clear for first quiz question.
