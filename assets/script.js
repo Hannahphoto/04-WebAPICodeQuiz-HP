@@ -1,33 +1,56 @@
+var startquizBtn = document.querySelector("#startquiz");
+var timerEl = document.getElementById("timer");
+var clearEl = document.querySelector("#clear");
+var q1 = document.createElement("q1");   
+var q2 = document.createElement("q2");
+var q3 = document.createElement("q3");
+var q4 = document.createElement("q4");
+var q5 = document.createElement("q5");
+var q6 = document.createElement("q6");
+
+// document.querySelector('container').innerHTML = " ";
+
 // //WHEN I click the start button
 // THEN a timer starts and I am presented with a question
-var starquizBtn = document.querySelector("#startquiz");
-var timerEl = document.getElementById("timer");
-
 function generateQuiz() {
-var timeLeft = 60;
+    var timeLeft = 60;
     var timeInterval = setInterval(function (){
     timeLeft--;
-    timerEl.textContent = "Timer: " + timeLeft;
+    timerEl.textContent = "Timer: " + timeLeft; 
     if(timeLeft <=0){
         clearInterval(timeInterval)
     }
+    // if(timeLeft <= 59){
+    //     clearInterval(msgInterval);
+    // }
 }, 1000);
 }
+// if(generateQuiz === true){
+//     clearEl.innerHTML= " ";
 
-var quiz = "";
+// }
+
+function clear (){
+    clearEl.document.innerHTML = " ";
+}
+
+function quiz (){
+    q1.textContent = ["Commonly used data types DO NOT include: ", "#1 Strings", "#2 Booleans", "#3 Alerts", "#4 Numbers"];
+    q2.text
+}
 
 function startquiz(){
-    quiz = generateQuiz();
+    quiz = generateQuiz(); 
+   
 }
 
 
-starquizBtn.addEventListener("click",startquiz)
 
-// var startquiz = setInterval(function(){
-//     var timeInterval
-// }    
+startquizBtn.addEventListener("click", startquiz)
+;
+// startquizBtn.addEventListener("click", clear);
 
-// startquizBtn.addEventListener("click", startquiz);
+
 
 // WHEN I answer a question
 // THEN I am presented with another question
