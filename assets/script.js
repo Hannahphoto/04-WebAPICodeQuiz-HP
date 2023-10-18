@@ -2,6 +2,7 @@ var startquizBtn = document.querySelector("#startquiz");
 var timerEl = document.getElementById("timer");
 var clearEl = document.querySelector("#clear");
 var questionEl = document.querySelector("#questiontitle");
+var questionIndex = 0;
 
 const myQuestions = [
     {
@@ -53,13 +54,8 @@ const myQuestions = [
         correctAnswer: "#2 for",
     },
     ];
-// var q3 = document.createElement("q3");
-// var q4 = document.createElement("q4");
-// var q5 = document.createElement("q5");
-// var q6 = document.createElement("q6");
 
-// //WHEN I click the start button
-// THEN a timer starts and I am presented with a question
+
 function clear (){
     document.querySelector(".container").innerHTML= " ";
 }
@@ -77,39 +73,80 @@ function runTimer() {
 
 function quiz (){
     var q = document.createElement("p");   
-    q.textContent = myQuestions[0].question;
+    q.textContent = myQuestions[questionIndex].question;
     questionEl.appendChild(q);
     var ul = document.createElement("ul");
     questionEl.appendChild(ul);
+    // ul.appendChild(buttonEl);
 
     // ans.textContent = myQuestions[0].answers;
-    for(i=0; i < myQuestions[0].answers.length; i++){
-        var ans = document.createElement("li");
-        ul.appendChild(ans);
-        ans.textContent = myQuestions[0].answers[i];
-    }
-}
-
+    for(i=0; i < myQuestions[questionIndex].answers.length; i++){
+        var buttonEl = document.createElement("button");
+        ul.appendChild(buttonEl);
+        buttonEl.textContent = myQuestions[questionIndex].answers[i];
+        questionEl.appendChild(buttonEl);
+            // for(ans.matches(buttonEl)){
+            //     answers[i] + buttonEl;
+            }
+        //  array.forEach(ul => {
+        //     appendChild(buttonEl);
+        //  });
+       }
+            
+        
+// //WHEN I click the start button
+// THEN a timer starts and I am presented with a question
 function startquiz(){
     clear();
     runTimer();
     quiz(); 
 }
 
-startquizBtn.addEventListener("click", startquiz);
-
-
 // WHEN I answer a question
 // THEN I am presented with another question
-
 
 // WHEN I answer a question incorrectly
 // THEN time is subtracted from the clock
 
-
 // WHEN all questions are answered or the timer reaches 0
 // THEN the game is over
 
+function checkanswer(event){
+    var clickChoice = event.target;
+    if(clickChoice.value !== myQuestions[questionIndex].correctAnswer){
+        time -= 10;
+    if(time < 0){
+        time = 0;
+    }
+        timerEl.textContent = time; 
+        console.log("incorrect"); // replace later
+    }
+    else{
+        console.log("Correct!")
+    }
+    questionIndex++;  //  to next question
+
+    if(time <= 0 || questionIndex === myQuestions.length){
+        // call quizEnd function.
+    }
+    else{
+        quiz();
+    }
+
+    }
+    
+
+startquizBtn.addEventListener("click", startquiz);
 
 // WHEN the game is over
 // THEN I can save my initials and my score 
+
+
+
+
+
+
+
+
+
+

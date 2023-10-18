@@ -26,3 +26,4 @@ THEN I can save my initials and my score
 ```
 
 Sunday evening had help with ask bcs app, getting questions to appear and direction on how to get page to clear for first quiz question.
+TA office hours help getting answers to make a list. 

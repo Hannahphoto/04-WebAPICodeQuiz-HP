@@ -29,6 +29,8 @@ button {
     margin: auto;
     margin-top: 20px;
     cursor: pointer;
+    display: block;
+    /* font-weight: 300; */
 }
 
 #questiontitle{
@@ -42,8 +44,12 @@ button {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     height: 700px;
     list-style-type: none;
+    font-weight: 700;
 }
 
 #questiontitle ul{
-    list-style-type: none;
+    /* display:block; */
+    /* list-style-type: none; */
+    font-weight: 500;
+    
 }
