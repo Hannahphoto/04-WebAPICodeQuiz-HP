@@ -14,7 +14,7 @@ const myQuestions = [
         correctAnswer: "#3 Alerts",
     },
     {
-        question: "The condition in an if/else statement is enclosed withing ____.",
+        question: "The condition in an IF/ELSE statement is enclosed within ____.",
         answers: ["#1 Quotes", 
                   "#2 Curly Brackets", 
                   "#3 Parantheses", 
@@ -60,7 +60,7 @@ function clear (){
     document.querySelector(".container").innerHTML= " ";
 }
 
-function runTimer() {
+function runTimer(){
     var timeLeft = 60;
     var timeInterval = setInterval(function (){
     timeLeft--;
@@ -77,20 +77,18 @@ function quiz (){
     questionEl.appendChild(q);
     var ul = document.createElement("ul");
     questionEl.appendChild(ul);
-    // ul.appendChild(buttonEl);
 
-    // ans.textContent = myQuestions[0].answers;
     for(i=0; i < myQuestions[questionIndex].answers.length; i++){
         var buttonEl = document.createElement("button");
         ul.appendChild(buttonEl);
         buttonEl.textContent = myQuestions[questionIndex].answers[i];
         questionEl.appendChild(buttonEl);
-            // for(ans.matches(buttonEl)){
-            //     answers[i] + buttonEl;
+            // add a eventListener to buttons.
+            buttonEl.addEventListener("click", checkanswer);
+            
+
             }
-        //  array.forEach(ul => {
-        //     appendChild(buttonEl);
-        //  });
+        
        }
             
         
@@ -112,27 +110,37 @@ function startquiz(){
 // THEN the game is over
 
 function checkanswer(event){
+    
     var clickChoice = event.target;
     if(clickChoice.value !== myQuestions[questionIndex].correctAnswer){
-        time -= 10;
-    if(time < 0){
-        time = 0;
-    }
-        timerEl.textContent = time; 
+        timeLeft = runTimer
+        timeLeft -= 10;
+        // timerEl.textContent = "time: "+ timeLeft
         console.log("incorrect"); // replace later
+        
+
+    // if(timeLeft < 0){
+
+    // }
+    
     }
+
     else{
         console.log("Correct!")
+       
     }
+   
     questionIndex++;  //  to next question
 
-    if(time <= 0 || questionIndex === myQuestions.length){
+    if(timeLeft <= 0 || questionIndex === myQuestions.length){
         // call quizEnd function.
     }
     else{
+        clear();
         quiz();
+        
     }
-
+    
     }
     
 

@@ -25,12 +25,15 @@ button {
     width: 90px;
     height: 40px;
     color:white;
-    background-color: purple;
+    background-color: rgb(77, 35, 107);
     margin: auto;
     margin-top: 20px;
     cursor: pointer;
     display: block;
     /* font-weight: 300; */
+    position: relative;
+    /* right: 100px; */
+    border-radius: 10px;
 }
 
 #questiontitle{
