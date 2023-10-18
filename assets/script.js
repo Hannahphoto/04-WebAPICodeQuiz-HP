@@ -71,6 +71,9 @@ function runTimer(){
 }, 1000);
 }
 
+
+// WHEN I answer a question
+// THEN I am presented with another question
 function quiz (){
     var q = document.createElement("p");   
     q.textContent = myQuestions[questionIndex].question;
@@ -85,10 +88,7 @@ function quiz (){
         questionEl.appendChild(buttonEl);
             // add a eventListener to buttons.
             buttonEl.addEventListener("click", checkanswer);
-            
-
-            }
-        
+            }     
        }
             
         
@@ -100,9 +100,6 @@ function startquiz(){
     quiz(); 
 }
 
-// WHEN I answer a question
-// THEN I am presented with another question
-
 // WHEN I answer a question incorrectly
 // THEN time is subtracted from the clock
 
@@ -112,17 +109,12 @@ function startquiz(){
 function checkanswer(event){
     
     var clickChoice = event.target;
-    if(clickChoice.value !== myQuestions[questionIndex].correctAnswer){
-        timeLeft = runTimer
+    if(clickChoice.value !== myQuestions[questionIndex].correctAnswer[i]){
+        timeLeft = timerEl;
         timeLeft -= 10;
-        // timerEl.textContent = "time: "+ timeLeft
         console.log("incorrect"); // replace later
-        
-
-    // if(timeLeft < 0){
-
-    // }
-    
+        questionEl.innerHTML = " ";
+        questionIndex++;
     }
 
     else{
@@ -130,7 +122,6 @@ function checkanswer(event){
        
     }
    
-    questionIndex++;  //  to next question
 
     if(timeLeft <= 0 || questionIndex === myQuestions.length){
         // call quizEnd function.
