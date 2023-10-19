@@ -2,14 +2,27 @@ var startquizBtn = document.querySelector("#startquiz");
 var timerEl = document.getElementById("timer");
 var clearEl = document.querySelector("#clear");
 var questionEl = document.querySelector("#questiontitle");
+var highScoreEl = document.querySelector("#highscore");
+var container = document.querySelector(".container");
+// var h1 = document.querySelector(".h1");
+var sectionHome = document.getElementById("#home");
+// var child = document.getElementById("#child");
 var timeLeft = 60;
 var timeInterval ;
-var container = document.querySelector(".container");
-// var highScores = document.getElementById("highscores");
+var inputScore= 0;
+var  inputInitial= 0;
 
 var questionIndex = 0;
+var scorePageIndex = 0;
 
-// var highScores = 0;
+const highScorePage = [
+    {
+        h2: "Highsores:",
+        goBackClear: [
+            "Go Back",
+            "Clear Score"], 
+    },
+];
 
 const myQuestions = [
     {
@@ -170,6 +183,9 @@ function finalScore (){
 
     };
 
+    // WHEN the game is over
+// THEN I can save my initials and my score 
+
 function saveInput (event){
     console.log(event.target);
     console.log(event.target.parentNode.childNodes);
@@ -177,40 +193,42 @@ function saveInput (event){
     var inputScore = event.target.parentNode.childNodes[2];
     console.log(inputInitial.value, inputScore.textContent);
     container.innerHTML = " ";
-    highscore();
+    highScore();
 };
 
 
 
-function highscore (){
-    inputScore= 0;
+function highScore (){
+    var highScore = document.createElement("Highscore");
+    highScore.textContent = highScorePage[scorePageIndex].h2;
+    questionEl.appendChild(highScore);
     var score = document.createElement("score");
     var scoreList = document.createElement("scoreList");
-    var homeButtonEl = document.createElement("home");
-    var clearScoreEl = document.createElement("clearScore");
-    score.textContent = ("Highscores: ");
-    homeButtonEl.textContent = ("home");
-    clearScoreEl.textContent = ("Clear Score");
-    scoreList.textContent = (inputScore);
-    container.append(score);
-    container.append(scoreList);
-    container.append(homeButtonEl);
-    container.append(clearScoreEl);
-    homeButtonEl.addEventListener("click", startQuiz);
-    clearScoreEl.addEventListener("click",);
+    score.textContent = (inputScore);
+    scoreList.textContent = (inputInitial);
+    questionEl.appendChild(score);
+    questionEl.appendChild(scoreList);
+    for(i = 0; i < highScorePage[scorePageIndex].goBackClear.length; i++){
+        var buttonEl = document.createElement("button");
+        buttonEl.textContent= highScorePage[scorePageIndex].goBackClear[i];
+        highScore.appendChild(buttonEl);
+        questionEl.appendChild(buttonEl);
+        buttonEl.addEventListener("click", homePage);
+    };
+
+};
+// retrun to homepage
+function homePage(){
+    // html = sectionHome;
+    // homeElement = sectionHome;
+    // // var homePage = document.querySelector(".h1");
+    // // var html = homePage.innerHTML = "";
+    // let html = document.getElementById("home").innerHTML;
+    // questionEl.innerHTML= " ";
+    // var homeElement = document.getElementById("home");
+    // startQuiz();
 };
 
 startquizBtn.addEventListener("click", startQuiz);
-
-// WHEN the game is over
-// THEN I can save my initials and my score 
-
-
-
-
-
-
-
-
 
 
