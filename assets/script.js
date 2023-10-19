@@ -2,7 +2,14 @@ var startquizBtn = document.querySelector("#startquiz");
 var timerEl = document.getElementById("timer");
 var clearEl = document.querySelector("#clear");
 var questionEl = document.querySelector("#questiontitle");
+var timeLeft = 60;
+var timeInterval ;
+var container = document.querySelector(".container");
+// var initialsEL = document.querySelector("#initials");
+
 var questionIndex = 0;
+
+var highScoresIndex = 0;
 
 const myQuestions = [
     {
@@ -60,13 +67,15 @@ function clear (){
     document.querySelector(".container").innerHTML= " ";
 }
 
+
+
 function runTimer(){
-    var timeLeft = 60;
-    var timeInterval = setInterval(function (){
+    timeInterval = setInterval(function (){
     timeLeft--;
     timerEl.textContent = "Timer: " + timeLeft; 
     if(timeLeft <=0){
         clearInterval(timeInterval)
+        endQuiz();
     }
 }, 1000);
 }
@@ -87,14 +96,15 @@ function quiz (){
         buttonEl.textContent = myQuestions[questionIndex].answers[i];
         questionEl.appendChild(buttonEl);
             // add a eventListener to buttons.
-            buttonEl.addEventListener("click", checkanswer);
+            buttonEl.addEventListener("click", checkAnswer);
+       
             }     
        }
-            
-        
+
 // //WHEN I click the start button
 // THEN a timer starts and I am presented with a question
-function startquiz(){
+
+function startQuiz(){
     clear();
     runTimer();
     quiz(); 
@@ -103,14 +113,11 @@ function startquiz(){
 // WHEN I answer a question incorrectly
 // THEN time is subtracted from the clock
 
-// WHEN all questions are answered or the timer reaches 0
-// THEN the game is over
-
-function checkanswer(event){
-    
+function checkAnswer(event){
+    // matches?
     var clickChoice = event.target;
+    // clickChoice = localStorage.getItem("clickChoice");
     if(clickChoice.value !== myQuestions[questionIndex].correctAnswer[i]){
-        timeLeft = timerEl;
         timeLeft -= 10;
         console.log("incorrect"); // replace later
         questionEl.innerHTML = " ";
@@ -119,23 +126,81 @@ function checkanswer(event){
 
     else{
         console.log("Correct!")
-       
     }
-   
-
     if(timeLeft <= 0 || questionIndex === myQuestions.length){
-        // call quizEnd function.
+        endQuiz();
+        questionEl.innerHTML=" ";
     }
     else{
-        clear();
-        quiz();
-        
+        questionEl.innerHTML = " ";
+        quiz(); 
+    }  
     }
-    
-    }
-    
 
-startquizBtn.addEventListener("click", startquiz);
+// WHEN all questions are answered or the timer reaches 0
+// THEN the game is over
+
+
+function endQuiz(){
+    // localStorage.setItem("clickChoice")
+    if(timeLeft <=0){
+        timeLeft = 0;
+    }
+        clearInterval(timeInterval)
+    
+    var input = document.createElement("input");
+    var buttonEl = document.createElement("button");
+    var inputScore = document.createElement("div");
+    var textlEl = document.createElement("text");
+    var allDoneEl = document.createElement("alldone");
+    allDoneEl.textContent = ("All Done!  ");
+    textlEl.textContent = "Enter initials: ";
+    buttonEl.textContent = "Save";
+    inputScore.textContent = "Your final score is: " + timeLeft;
+    container.append(allDoneEl);
+    container.append(textlEl);
+    container.append(input);
+    container.append(inputScore);
+    container.append(buttonEl);
+    buttonEl.addEventListener("click", saveInput);
+   
+    };
+
+function finalScore (){
+
+    };
+
+function saveInput (event){
+    console.log(event.target);
+    console.log(event.target.parentNode.childNodes);
+    var inputInitial = event.target.parentNode.childNodes[1];
+    var inputScore = event.target.parentNode.childNodes[2];
+    console.log(inputInitial.value, inputScore.textContent);
+    container.innerHTML = " ";
+
+};
+
+function highScores (){
+    // container.innerHTML=" ";
+    var scores = createElement("scores");
+    var listScores = createElement("listScores");
+    var backButtonEl = createElement("go back");
+    var clearScoreEl = creatElement("clearScore");
+    scores.textContent = ("Highscores: ");
+    backButtonEl.textContent = ("Go back");
+    clearScoreEl.textContent = ("Clear Score");
+    listScores.textContent =(inputScore);
+    container.append(scores);
+    container.append(listScores);
+    container.append(backButtonEl);
+    container.append(clearScoreEl);
+    backButtonEl.addEventListener("click");
+    clearScoreEl.addEventListener("click");
+
+
+};
+
+startquizBtn.addEventListener("click", startQuiz);
 
 // WHEN the game is over
 // THEN I can save my initials and my score 
