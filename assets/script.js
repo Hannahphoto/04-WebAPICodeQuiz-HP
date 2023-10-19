@@ -5,11 +5,11 @@ var questionEl = document.querySelector("#questiontitle");
 var timeLeft = 60;
 var timeInterval ;
 var container = document.querySelector(".container");
-// var initialsEL = document.querySelector("#initials");
+// var highScores = document.getElementById("highscores");
 
 var questionIndex = 0;
 
-var highScoresIndex = 0;
+// var highScores = 0;
 
 const myQuestions = [
     {
@@ -117,7 +117,7 @@ function checkAnswer(event){
     // matches?
     var clickChoice = event.target;
     // clickChoice = localStorage.getItem("clickChoice");
-    if(clickChoice.value !== myQuestions[questionIndex].correctAnswer[i]){
+    if(clickChoice.value !== myQuestions[questionIndex].correctAnswer){
         timeLeft -= 10;
         console.log("incorrect"); // replace later
         questionEl.innerHTML = " ";
@@ -163,7 +163,7 @@ function endQuiz(){
     container.append(inputScore);
     container.append(buttonEl);
     buttonEl.addEventListener("click", saveInput);
-   
+    // highScores();
     };
 
 function finalScore (){
@@ -177,27 +177,27 @@ function saveInput (event){
     var inputScore = event.target.parentNode.childNodes[2];
     console.log(inputInitial.value, inputScore.textContent);
     container.innerHTML = " ";
-
+    highscore();
 };
 
-function highScores (){
-    // container.innerHTML=" ";
-    var scores = createElement("scores");
-    var listScores = createElement("listScores");
-    var backButtonEl = createElement("go back");
-    var clearScoreEl = creatElement("clearScore");
-    scores.textContent = ("Highscores: ");
-    backButtonEl.textContent = ("Go back");
+
+
+function highscore (){
+    inputScore= 0;
+    var score = document.createElement("score");
+    var scoreList = document.createElement("scoreList");
+    var homeButtonEl = document.createElement("home");
+    var clearScoreEl = document.createElement("clearScore");
+    score.textContent = ("Highscores: ");
+    homeButtonEl.textContent = ("home");
     clearScoreEl.textContent = ("Clear Score");
-    listScores.textContent =(inputScore);
-    container.append(scores);
-    container.append(listScores);
-    container.append(backButtonEl);
+    scoreList.textContent = (inputScore);
+    container.append(score);
+    container.append(scoreList);
+    container.append(homeButtonEl);
     container.append(clearScoreEl);
-    backButtonEl.addEventListener("click");
-    clearScoreEl.addEventListener("click");
-
-
+    homeButtonEl.addEventListener("click", startQuiz);
+    clearScoreEl.addEventListener("click",);
 };
 
 startquizBtn.addEventListener("click", startQuiz);
