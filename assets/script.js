@@ -4,16 +4,15 @@ var clearEl = document.querySelector("#clear");
 var questionEl = document.querySelector("#questiontitle");
 var highScoreEl = document.querySelector("#highscore");
 var container = document.querySelector(".container");
-// var h1 = document.querySelector(".h1");
 var sectionHome = document.getElementById("#home");
-// var child = document.getElementById("#child");
+// var saveInitials = document.querySelector("saveInitials");
 var timeLeft = 60;
 var timeInterval ;
-var inputScore= 0;
-var  inputInitial= 0;
-
+var inputScore= [];
+var inputInitial= [];
 var questionIndex = 0;
 var scorePageIndex = 0;
+var score = [];
 
 const highScorePage = [
     {
@@ -37,9 +36,9 @@ const myQuestions = [
         question: "The condition in an IF/ELSE statement is enclosed within ____.",
         answers: ["#1 Quotes", 
                   "#2 Curly Brackets", 
-                  "#3 Parantheses", 
+                  "#3 Parenthesis", 
                   "#4 Square Brackets"],
-        correctAnswer: "#3 Paranthesis",
+        correctAnswer: "#3 Parenthesis",
     },
    {
         question: "Arrays in JavaScript can be used to store_________.",
@@ -53,7 +52,7 @@ const myQuestions = [
         question: "An object is surrounded by  ____.",
         answers: ["#1 Quotes", 
                   "#2 Curly Brackets", 
-                  "#3 Parantheses", 
+                  "#3 Parentheses", 
                   "#4 Square Brackets"],
         correctAnswer: "#2 Curly Brackets",
     },
@@ -88,6 +87,7 @@ function runTimer(){
     timerEl.textContent = "Timer: " + timeLeft; 
     if(timeLeft <=0){
         clearInterval(timeInterval)
+        questionEl.innerHTML = " ";
         endQuiz();
     }
 }, 1000);
@@ -96,6 +96,7 @@ function runTimer(){
 
 // WHEN I answer a question
 // THEN I am presented with another question
+
 function quiz (){
     var q = document.createElement("p");   
     q.textContent = myQuestions[questionIndex].question;
@@ -108,7 +109,6 @@ function quiz (){
         ul.appendChild(buttonEl);
         buttonEl.textContent = myQuestions[questionIndex].answers[i];
         questionEl.appendChild(buttonEl);
-            // add a eventListener to buttons.
             buttonEl.addEventListener("click", checkAnswer);
        
             }     
@@ -127,18 +127,21 @@ function startQuiz(){
 // THEN time is subtracted from the clock
 
 function checkAnswer(event){
-    // matches?
-    var clickChoice = event.target;
-    // clickChoice = localStorage.getItem("clickChoice");
-    if(clickChoice.value !== myQuestions[questionIndex].correctAnswer){
+    // matches? unfortunately could not get matches method to work for me
+    var buttonEl = event.target;
+    if(buttonEl.textContent === myQuestions[questionIndex].correctAnswer) {
+        // buttonEl.value.push(inputScore);
+        console.log("Correct!")
+        questionIndex++;
+       
+    }
+
+    else{
         timeLeft -= 10;
         console.log("incorrect"); // replace later
         questionEl.innerHTML = " ";
         questionIndex++;
-    }
-
-    else{
-        console.log("Correct!")
+        
     }
     if(timeLeft <= 0 || questionIndex === myQuestions.length){
         endQuiz();
@@ -148,11 +151,10 @@ function checkAnswer(event){
         questionEl.innerHTML = " ";
         quiz(); 
     }  
-    }
+    };
 
 // WHEN all questions are answered or the timer reaches 0
 // THEN the game is over
-
 
 function endQuiz(){
     // localStorage.setItem("clickChoice")
@@ -163,35 +165,43 @@ function endQuiz(){
     
     var input = document.createElement("input");
     var buttonEl = document.createElement("button");
-    var inputScore = document.createElement("div");
+    // var inputScore = document.createElement("div");
     var textlEl = document.createElement("text");
     var allDoneEl = document.createElement("alldone");
     allDoneEl.textContent = ("All Done!  ");
     textlEl.textContent = "Enter initials: ";
     buttonEl.textContent = "Save";
-    inputScore.textContent = "Your final score is: " + timeLeft;
+    var scoreEl = document.createElement("div");
+    // scoreEl.textContent = "Your final score is: " + score;
     container.append(allDoneEl);
     container.append(textlEl);
     container.append(input);
-    container.append(inputScore);
+    // container.append(score);
     container.append(buttonEl);
     buttonEl.addEventListener("click", saveInput);
-    // highScores();
+    
     };
 
-function finalScore (){
-
-    };
+// function finalScore (){
+        
+//         questionEl.appendChild(score);
+//         renderQuiz();
+//     };
 
     // WHEN the game is over
 // THEN I can save my initials and my score 
 
-function saveInput (event){
-    console.log(event.target);
-    console.log(event.target.parentNode.childNodes);
-    var inputInitial = event.target.parentNode.childNodes[1];
-    var inputScore = event.target.parentNode.childNodes[2];
-    console.log(inputInitial.value, inputScore.textContent);
+function saveInput (){
+    // localStorage.setItem("initials", JSON.stringify(input));
+    // input.addEventListener("click", function(event){
+    //     event.preventDefault();
+    // });
+    // var initialText = saveInitials.value;
+    // saveInitials.push(initialText);
+    // saveInitials.value = " ";
+    // localStorage.setItem("score", JSON.stringify(inputScore));
+    // var scoreText = inputScore.value;
+    // scoreText = " ";
     container.innerHTML = " ";
     highScore();
 };
@@ -220,18 +230,19 @@ function highScore (){
     };
 
 };
-// retrun to homepage
-// function homePage(){
-//     // html = sectionHome;
-//     // homeElement = sectionHome;
-//     // // var homePage = document.querySelector(".h1");
-//     // // var html = homePage.innerHTML = "";
-//     // let html = document.getElementById("home").innerHTML;
-//     // questionEl.innerHTML= " ";
-//     // var homeElement = document.getElementById("home");
-//     // startQuiz();
-// };
+
+function renderQuiz(){
+
+};
 
 startquizBtn.addEventListener("click", startQuiz);
 
 
+// localStorage.setItem("score", JSON.stringify(score));
+    // var inputScore = JSON.parse(localStorage.getItem())
+    // var inputInitial = JSON.parse(localStorage.getItem("inputInitials"));
+    // console.log();
+    // console.log(event.target.parentNode.childNodes);
+    // var inputInitial = event.target.parentNode.childNodes[1];
+    // var inputScore = event.target.parentNode.childNodes[2];
+    // console.log(inputInitial.value, inputScore.textContent);
