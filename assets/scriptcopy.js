@@ -4,15 +4,13 @@ var clearEl = document.querySelector("#clear");
 var questionEl = document.querySelector("#questiontitle");
 var highScoreEl = document.querySelector("#highscore");
 var container = document.querySelector(".container");
-var sectionHome = document.getElementById("#home");
-// var saveInitials = document.querySelector("saveInitials");
 var timeLeft = 60;
 var timeInterval ;
 var inputScore= [];
 var inputInitial= [];
 var questionIndex = 0;
 var scorePageIndex = 0;
-var score = [];
+
 
 const highScorePage = [
     {
@@ -130,7 +128,6 @@ function checkAnswer(event){
     // matches? unfortunately could not get matches method to work for me
     var buttonEl = event.target;
     if(buttonEl.textContent === myQuestions[questionIndex].correctAnswer) {
-        // buttonEl.value.push(inputScore);
         console.log("Correct!")
         questionIndex++;
        
@@ -157,51 +154,30 @@ function checkAnswer(event){
 // THEN the game is over
 
 function endQuiz(){
-    // localStorage.setItem("clickChoice")
     if(timeLeft <=0){
         timeLeft = 0;
     }
-        clearInterval(timeInterval)
-    
-    var input = document.createElement("input");
+    clearInterval(timeInterval);
+    var input = document.createElement("input");//bar for initials
     var buttonEl = document.createElement("button");
-    // var inputScore = document.createElement("div");
-    var textlEl = document.createElement("text");
+    var textlEl = document.createElement("text");//"enter initials"
     var allDoneEl = document.createElement("alldone");
     allDoneEl.textContent = ("All Done!  ");
     textlEl.textContent = "Enter initials: ";
     buttonEl.textContent = "Save";
-    var scoreEl = document.createElement("div");
-    // scoreEl.textContent = "Your final score is: " + score;
     container.append(allDoneEl);
     container.append(textlEl);
     container.append(input);
-    // container.append(score);
     container.append(buttonEl);
     buttonEl.addEventListener("click", saveInput);
     
     };
 
-// function finalScore (){
-        
-//         questionEl.appendChild(score);
-//         renderQuiz();
-//     };
-
     // WHEN the game is over
 // THEN I can save my initials and my score 
 
 function saveInput (){
-    // localStorage.setItem("initials", JSON.stringify(input));
-    // input.addEventListener("click", function(event){
-    //     event.preventDefault();
-    // });
-    // var initialText = saveInitials.value;
-    // saveInitials.push(initialText);
-    // saveInitials.value = " ";
-    // localStorage.setItem("score", JSON.stringify(inputScore));
-    // var scoreText = inputScore.value;
-    // scoreText = " ";
+
     container.innerHTML = " ";
     highScore();
 };
@@ -209,7 +185,7 @@ function saveInput (){
 function goBack (){
     questionEl.innerHTML = " ";
     window.location.reload();
-}
+};
 
 function highScore (){
     var highScore = document.createElement("Highscore");
@@ -228,7 +204,6 @@ function highScore (){
         questionEl.appendChild(buttonEl);
         buttonEl.addEventListener("click", goBack);
     };
-
 };
 
 function renderQuiz(){
@@ -236,13 +211,3 @@ function renderQuiz(){
 };
 
 startquizBtn.addEventListener("click", startQuiz);
-
-
-// localStorage.setItem("score", JSON.stringify(score));
-    // var inputScore = JSON.parse(localStorage.getItem())
-    // var inputInitial = JSON.parse(localStorage.getItem("inputInitials"));
-    // console.log();
-    // console.log(event.target.parentNode.childNodes);
-    // var inputInitial = event.target.parentNode.childNodes[1];
-    // var inputScore = event.target.parentNode.childNodes[2];
-    // console.log(inputInitial.value, inputScore.textContent);
