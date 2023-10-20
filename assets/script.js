@@ -196,7 +196,10 @@ function saveInput (event){
     highScore();
 };
 
-
+function goBack (){
+    questionEl.innerHTML = " ";
+    window.location.reload();
+}
 
 function highScore (){
     var highScore = document.createElement("Highscore");
@@ -213,21 +216,21 @@ function highScore (){
         buttonEl.textContent= highScorePage[scorePageIndex].goBackClear[i];
         highScore.appendChild(buttonEl);
         questionEl.appendChild(buttonEl);
-        buttonEl.addEventListener("click", homePage);
+        buttonEl.addEventListener("click", goBack);
     };
 
 };
 // retrun to homepage
-function homePage(){
-    // html = sectionHome;
-    // homeElement = sectionHome;
-    // // var homePage = document.querySelector(".h1");
-    // // var html = homePage.innerHTML = "";
-    // let html = document.getElementById("home").innerHTML;
-    // questionEl.innerHTML= " ";
-    // var homeElement = document.getElementById("home");
-    // startQuiz();
-};
+// function homePage(){
+//     // html = sectionHome;
+//     // homeElement = sectionHome;
+//     // // var homePage = document.querySelector(".h1");
+//     // // var html = homePage.innerHTML = "";
+//     // let html = document.getElementById("home").innerHTML;
+//     // questionEl.innerHTML= " ";
+//     // var homeElement = document.getElementById("home");
+//     // startQuiz();
+// };
 
 startquizBtn.addEventListener("click", startQuiz);
 
