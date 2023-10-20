@@ -8,11 +8,12 @@ var timeLeft = 60;
 var timeInterval ;
 var questionIndex = 0;
 var scorePageIndex = 0;
+var initialInput = "";
 
 
 const highScorePage = [
     {
-        h2: "Highsores:",
+        h2: "Highscores:",
         goBackClear: [
             "Go Back",
             "Clear Score"], 
@@ -160,6 +161,8 @@ function endQuiz(){
     var buttonEl = document.createElement("button");
     var textlEl = document.createElement("text");//"enter initials"
     var allDoneEl = document.createElement("alldone");
+    
+
     allDoneEl.textContent = ("All Done!  ");
     textlEl.textContent = "Enter initials: ";
     buttonEl.textContent = "Save";
@@ -167,16 +170,27 @@ function endQuiz(){
     container.append(textlEl);
     container.append(input);
     container.append(buttonEl);
-    buttonEl.addEventListener("click", saveInput);
-   
-    
-    };
+    buttonEl.addEventListener("click", function(){
+        initialInput = input.value;
+        if( initialInput === " "){
+            displayMessage("Initials must be submited.");
+        }
+        else {
+            localStorage.setItem("initials", initialInput);
+            saveInput();
+             };
+    });
+
+};
 
     // WHEN the game is over
 // THEN I can save my initials and my score 
 
-function saveInput (){
+// initialInput.textContent = " ";
 
+function saveInput (){
+    // var initials = initialInput
+    localStorage.setItem("initials", initialInput);
     container.innerHTML = " ";
     highScore();
 };
@@ -187,10 +201,16 @@ function goBack (){
 };
 
 function highScore (){
+    var initialInput = localStorage.getItem("initials");
+    
     var highScore = document.createElement("Highscore");
     highScore.textContent = highScorePage[scorePageIndex].h2;
     questionEl.appendChild(highScore);
-   
+
+    var initialsText = document.createElement("p");
+    initialsText.textContent = "Initials: " + initialInput;
+    questionEl.appendChild(initialsText);
+    
     for(i = 0; i < highScorePage[scorePageIndex].goBackClear.length; i++){
         var buttonEl = document.createElement("button");
         buttonEl.textContent= highScorePage[scorePageIndex].goBackClear[i];
@@ -200,7 +220,7 @@ function highScore (){
     };
 };
 
-function renderQuiz(){
+function render(){
 
 };
 
