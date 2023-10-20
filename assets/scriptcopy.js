@@ -6,8 +6,6 @@ var highScoreEl = document.querySelector("#highscore");
 var container = document.querySelector(".container");
 var timeLeft = 60;
 var timeInterval ;
-var inputScore= [];
-var inputInitial= [];
 var questionIndex = 0;
 var scorePageIndex = 0;
 
@@ -170,6 +168,7 @@ function endQuiz(){
     container.append(input);
     container.append(buttonEl);
     buttonEl.addEventListener("click", saveInput);
+   
     
     };
 
@@ -191,12 +190,7 @@ function highScore (){
     var highScore = document.createElement("Highscore");
     highScore.textContent = highScorePage[scorePageIndex].h2;
     questionEl.appendChild(highScore);
-    var score = document.createElement("score");
-    var scoreList = document.createElement("scoreList");
-    score.textContent = (inputScore);
-    scoreList.textContent = (inputInitial);
-    questionEl.appendChild(score);
-    questionEl.appendChild(scoreList);
+   
     for(i = 0; i < highScorePage[scorePageIndex].goBackClear.length; i++){
         var buttonEl = document.createElement("button");
         buttonEl.textContent= highScorePage[scorePageIndex].goBackClear[i];
