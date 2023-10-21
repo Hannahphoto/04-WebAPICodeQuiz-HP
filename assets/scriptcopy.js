@@ -4,18 +4,20 @@ var clearEl = document.querySelector("#clear");
 var questionEl = document.querySelector("#questiontitle");
 var highScoreEl = document.querySelector("#highscore");
 var container = document.querySelector(".container");
+var viewHighScoresEl = document.getElementById("viewhighscore");
 var timeLeft = 60;
 var timeInterval ;
 var questionIndex = 0;
 var scorePageIndex = 0;
 var initialInput = "";
+var score = 0;
 
 
 const highScorePage = [
     {
         h2: "Highscores:",
         goBackClear: [
-            "Go Back",
+            "Home",
             "Clear Score"], 
     },
 ];
@@ -126,15 +128,17 @@ function startQuiz(){
 function checkAnswer(event){
     // matches? unfortunately could not get matches method to work for me
     var buttonEl = event.target;
+    
     if(buttonEl.textContent === myQuestions[questionIndex].correctAnswer) {
-        console.log("Correct!")
+        console.log("Correct!");
+        score += 10;
         questionIndex++;
        
     }
 
     else{
         timeLeft -= 10;
-        console.log("incorrect"); // replace later
+        console.log("Incorrect"); // replace later
         questionEl.innerHTML = " ";
         questionIndex++;
         
@@ -147,6 +151,8 @@ function checkAnswer(event){
         questionEl.innerHTML = " ";
         quiz(); 
     }  
+    finalScore = score;
+    localStorage.setItem("finalScore", finalScore);
     };
 
 // WHEN all questions are answered or the timer reaches 0
@@ -172,7 +178,7 @@ function endQuiz(){
     container.append(buttonEl);
     buttonEl.addEventListener("click", function(){
         initialInput = input.value;
-        if( initialInput === " "){
+        if(initialInput === " "){
             displayMessage("Initials must be submited.");
         }
         else {
@@ -186,11 +192,10 @@ function endQuiz(){
     // WHEN the game is over
 // THEN I can save my initials and my score 
 
-// initialInput.textContent = " ";
 
 function saveInput (){
-    // var initials = initialInput
     localStorage.setItem("initials", initialInput);
+    localStorage.setItem("finalScore", finalScore);
     container.innerHTML = " ";
     highScore();
 };
@@ -201,23 +206,73 @@ function goBack (){
 };
 
 function highScore (){
-    var initialInput = localStorage.getItem("initials");
+    initialInput = localStorage.getItem("initials");
+    score = localStorage.getItem("finalScore");
     
     var highScore = document.createElement("Highscore");
     highScore.textContent = highScorePage[scorePageIndex].h2;
     questionEl.appendChild(highScore);
 
-    var initialsText = document.createElement("p");
+    var initialsText = document.createElement("ul");
     initialsText.textContent = "Initials: " + initialInput;
     questionEl.appendChild(initialsText);
+
+    var scoreText = document.createElement("ul");
+    scoreText.textContent = "score: " + score;
+    questionEl.appendChild(scoreText);
     
-    for(i = 0; i < highScorePage[scorePageIndex].goBackClear.length; i++){
-        var buttonEl = document.createElement("button");
-        buttonEl.textContent= highScorePage[scorePageIndex].goBackClear[i];
-        highScore.appendChild(buttonEl);
-        questionEl.appendChild(buttonEl);
-        buttonEl.addEventListener("click", goBack);
-    };
+    var buttonEl = document.createElement("button");
+    buttonEl.textContent= "Home"
+    highScore.appendChild(buttonEl);
+    questionEl.appendChild(buttonEl);
+    buttonEl.addEventListener("click", goBack);
+
+    var buttonEl = document.createElement("button");
+    buttonEl.textContent= "Clear Score"
+    highScore.appendChild(buttonEl);
+    questionEl.appendChild(buttonEl);
+    buttonEl.addEventListener("click", clearScore);       
+        
+};
+
+function clearScore (){
+    score = 0;
+    localStorage.removeItem("finalScore", finalScore);
+    questionEl.innerHTML = " ";
+    highScore();
+};
+
+
+viewHighScoresEl.addEventListener("click", viewHighScoresPage);    
+
+function viewHighScoresPage (event){
+    clear();
+    questionEl.innerHTML = " ";
+
+    var highScoreList = document.createElement("div");
+    highScoreList.textContent = "High Score List:";
+    questionEl.appendChild(highScoreList);
+
+    
+
+    initialInput = localStorage.getItem("initials");
+    score = localStorage.getItem("finalScore");
+
+    var initialsText = document.createElement("ul");
+    initialsText.textContent = "Initials: " + initialInput;
+     var scoreText = document.createElement("ul");
+    scoreText.textContent = "score: " + score;
+
+    questionEl.appendChild(initialsText);
+    questionEl.appendChild(scoreText);
+   
+    var homeButtonEl = document.createElement("button");
+    homeButtonEl.textContent= "Home"
+    questionEl.appendChild(homeButtonEl);
+    homeButtonEl.addEventListener("click", goBack);
+    
+    
+
 };
 
 function render(){

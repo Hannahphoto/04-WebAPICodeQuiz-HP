@@ -6,25 +6,24 @@ nav {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    font-size: 17px;
+    font-size: 20px;
     padding: 10px
+}
+h1 {
+    font-size: 40px;
 }
 
 .container {
     display: flex;
     flex-direction: column;
-   
-    text-align: center;
-    display: block;}
- 
-
-#home {
-    display: flex;
-    flex-direction: column;
     text-align: center;
     display: block;
+    margin-left: 400px;
+    margin-right: 400px;
+    font-size: 20px;
+    font-style: bold;
 }
-
+    
 
 button {
     width: 90px;
@@ -35,16 +34,18 @@ button {
     margin-top: 20px;
     cursor: pointer;
     display: block;
-    /* font-weight: 300; */
     position: relative;
-    /* right: 100px; */
     border-radius: 10px;
+    font-style: bold;
+}
+
+button:hover {
+    opacity: 50%;
 }
 
 #questiontitle{
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
     text-align: center;
     display: block;
     font-size: 20px;
@@ -53,17 +54,20 @@ button {
     height: 700px;
     list-style-type: none;
     font-weight: 700;
+    margin-left: 400px;
+    margin-right: 400px;
 }
 
 #questiontitle ul{
-    /* display:block; */
-    /* list-style-type: none; */
     font-weight: 500;
+    font-style: bold;
 }
-/* 
-.questionBtns{
-    display: block;
-    position: relative;
-    right: 200px;
- */
-/* } */
+
+/* #questiontitle button {
+    right: 150px;
+
+} */
+
+#homepage {
+    font-size: 20px;
+}
