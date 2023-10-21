@@ -245,15 +245,17 @@ function clearScore (){
 
 viewHighScoresEl.addEventListener("click", viewHighScoresPage);    
 
-function viewHighScoresPage (event){
+// function preventDefault (event){
+//     event.preventDefault();
+// };
+
+function viewHighScoresPage (){
     clear();
     questionEl.innerHTML = " ";
 
     var highScoreList = document.createElement("div");
     highScoreList.textContent = "High Score List:";
     questionEl.appendChild(highScoreList);
-
-    
 
     initialInput = localStorage.getItem("initials");
     score = localStorage.getItem("finalScore");
@@ -266,14 +268,16 @@ function viewHighScoresPage (event){
     questionEl.appendChild(initialsText);
     questionEl.appendChild(scoreText);
    
+    // preventDefault();
+
     var homeButtonEl = document.createElement("button");
     homeButtonEl.textContent= "Home"
     questionEl.appendChild(homeButtonEl);
     homeButtonEl.addEventListener("click", goBack);
-    
-    
+
 
 };
+    
 
 function render(){
 
