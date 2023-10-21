@@ -12,6 +12,7 @@ var scorePageIndex = 0;
 var initialInput = "";
 var score = 0;
 
+var highScores = [];
 
 const highScorePage = [
     {
@@ -186,7 +187,6 @@ function endQuiz(){
             saveInput();
              };
     });
-
 };
 
     // WHEN the game is over
@@ -196,6 +196,12 @@ function endQuiz(){
 function saveInput (){
     localStorage.setItem("initials", initialInput);
     localStorage.setItem("finalScore", finalScore);
+    const newHighScore = {
+        initials: initialInput,
+        score: finalScore,
+    };
+    localStorage.setItem("highScores", JSON.stringify(highScores));
+    highScores.push(newHighScore);
     container.innerHTML = " ";
     highScore();
 };
@@ -256,25 +262,20 @@ function viewHighScoresPage (){
     highScoreList.textContent = "High Score List:";
     questionEl.appendChild(highScoreList);
 
-    initialInput = localStorage.getItem("initials");
-    score = localStorage.getItem("finalScore");
-
-    var initialsText = document.createElement("ul");
-    initialsText.textContent = "Initials: " + initialInput;
-     var scoreText = document.createElement("ul");
-    scoreText.textContent = "score: " + score;
-
-    questionEl.appendChild(initialsText);
-    questionEl.appendChild(scoreText);
+    localStorage.getItem("highScores", JSON.stringify(highScores));
    
-    // preventDefault();
+    if(highScores.length > 0){
+    var li = document.createElement("li")
+    for(var i=0; i < highScores.length; i++){
+            li.textContent = highScores[i].initials + ":" + highScores[i].score;
+    questionEl.appendchild(li);
+            };
+         }
 
     var homeButtonEl = document.createElement("button");
     homeButtonEl.textContent= "Home"
     questionEl.appendChild(homeButtonEl);
     homeButtonEl.addEventListener("click", goBack);
-
-
 };
     
 
@@ -283,3 +284,6 @@ function render(){
 };
 
 startquizBtn.addEventListener("click", startQuiz);
+
+// initialInput = localStorage.getItem("initials");
+//     score = localStorage.getItem("finalScore");
