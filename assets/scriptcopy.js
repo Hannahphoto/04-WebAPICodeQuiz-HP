@@ -201,7 +201,6 @@ function saveInput (){
 };
 
 function goBack (){
-    questionEl.innerHTML = " ";
     window.location.reload();
 };
 
@@ -232,7 +231,7 @@ function highScore (){
     highScore.appendChild(buttonEl);
     questionEl.appendChild(buttonEl);
     buttonEl.addEventListener("click", clearScore);       
-        
+  
 };
 
 function clearScore (){
