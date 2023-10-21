@@ -12,7 +12,7 @@ var scorePageIndex = 0;
 var initialInput = "";
 var score = 0;
 
-var highScores = [];
+var highScores = JSON.parse(localStorage.getItem("highScores") || "[]");
 
 const highScorePage = [
     {
@@ -211,8 +211,8 @@ function goBack (){
 };
 
 function highScore (){
-    initialInput = localStorage.getItem("initials");
-    score = localStorage.getItem("finalScore");
+    initialInput = (localStorage.getItem("initials"));
+    score =localStorage.getItem("finalScore");
     
     var highScore = document.createElement("Highscore");
     highScore.textContent = highScorePage[scorePageIndex].h2;
@@ -262,14 +262,14 @@ function viewHighScoresPage (){
     highScoreList.textContent = "High Score List:";
     questionEl.appendChild(highScoreList);
 
-    localStorage.getItem("highScores", JSON.stringify(highScores));
-   
+    JSON.parse(localStorage.getItem("highScores", highScores));
+    
     if(highScores.length > 0){
-    var li = document.createElement("li")
     for(var i=0; i < highScores.length; i++){
+            var li = document.createElement("li")
             li.textContent = highScores[i].initials + ":" + highScores[i].score;
-    questionEl.appendchild(li);
             };
+            questionEl.appendchild(li);
          }
 
     var homeButtonEl = document.createElement("button");
