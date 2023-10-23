@@ -152,7 +152,7 @@ function checkAnswer(event){
     }  
     finalScore = score;
     localStorage.setItem("finalScore", finalScore);
-    highScores.push(finalScore);
+    // highScores.push(finalScore);
     // render();
     };
 
@@ -185,7 +185,7 @@ function endQuiz(){
         }
         else {
             localStorage.setItem("initials", initialInput);
-            highScores.push(initialInput);
+            // highScores.push(initialInput);
             saveInput();
              };
     });
@@ -196,8 +196,9 @@ function endQuiz(){
 
 
 function saveInput (){
-    finalScore= highScores;
-    localStorage.setItem("highScores", JSON.stringify(highScores));
+    finalScore=localStorage.getItem("finalScore");
+    
+    // localStorage.setItem("highScores", JSON.stringify(highScores));
 
     const newHighScore = {
         initials: initialInput,
@@ -212,6 +213,8 @@ function saveInput (){
     }
     else {
         highScores.push(newHighScore);
+        localStorage.setItem("highScores", JSON.stringify(highScores));
+        console.log(highScores);
     };
 
     container.innerHTML = " ";
@@ -232,26 +235,35 @@ function highScore (){
     highScore.textContent = highScorePage[scorePageIndex].h2;
     questionEl.appendChild(highScore);
 
+    // var initialsText = document.createElement("ul");
+    // initialsText.textContent = "Initials: " + initialInput;
+
+    // var scoreText = document.createElement("ul");
+    // scoreText.textContent = "score: " + score;
+    
+    // var highScoreList = document.createElement("div");
+    // highScoreList.textContent = "Initials: " + initialInput + "  score: " + score;
+    // questionEl.appendChild(highScoreList);
+
+    // highScores.sort((a,b) => b.score - a.score);
+
+    // highScoreListSpan.textContent = highScores;
+
+    for(i = 0; i < highScores.length; i++) {
     var initialsText = document.createElement("ul");
-    initialsText.textContent = "Initials: " + initialInput;
+    initialsText.textContent = "Initials: " + highScores[i].initials;
 
     var scoreText = document.createElement("ul");
-    scoreText.textContent = "score: " + score;
+    scoreText.textContent = "score: " + highScores[i].score;
     
     var highScoreList = document.createElement("div");
-    highScoreList.textContent = "Initials: " + initialInput + "  score: " + score;
+    highScoreList.textContent = "Initials: " + highScores[i].initials + "  score: " + highScores[i].score;
     questionEl.appendChild(highScoreList);
-
-    highScores.sort((a,b) => b.score - a.score);
-
-    highScoreListSpan.textContent = highScores;
-
-    for(i = 0; i < highScores.lenth; i++) {
-        highScoreListSpan.textContent = highScores;
-        highScoreList = highScores[i];
-        highScoreList.textContent = "Initials: " + highScores[i].initialInput + "  score: " + highScores[i].score;
-        highScoreList.setAttribute("data-index", i);
-        questionEl.appendChild(highScoreList);
+        // highScoreListSpan.textContent = highScores;
+        // highScoreList = highScores[i];
+        // highScoreList.textContent = "Initials: " + highScores[i].initialInput + "  score: " + highScores[i].score;
+        // highScoreList.setAttribute("data-index", i);
+        // questionEl.appendChild(highScoreList);
     };
 
 
@@ -277,6 +289,13 @@ function clearScore (){
 
 
 viewHighScoresEl.addEventListener("click", saveInput);
+
+function init(){
+    var storedScores = JSON.parse(localStorage.getItem(highScores));
+    if(storedScores !== null){
+        highScores = storedScores
+    }
+}
 
 // function render(){
 //     highScoreList = highScores;
