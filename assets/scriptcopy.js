@@ -125,7 +125,6 @@ function startQuiz(){
 // THEN time is subtracted from the clock
 
 function checkAnswer(event){
-    // matches? unfortunately could not get matches method to work for me
     var buttonEl = event.target;
     
     if(buttonEl.textContent === myQuestions[questionIndex].correctAnswer) {
@@ -152,8 +151,6 @@ function checkAnswer(event){
     }  
     finalScore = score;
     localStorage.setItem("finalScore", finalScore);
-    // highScores.push(finalScore);
-    // render();
     };
 
 // WHEN all questions are answered or the timer reaches 0
@@ -185,7 +182,6 @@ function endQuiz(){
         }
         else {
             localStorage.setItem("initials", initialInput);
-            // highScores.push(initialInput);
             saveInput();
              };
     });
@@ -198,7 +194,6 @@ function endQuiz(){
 function saveInput (){
     finalScore=localStorage.getItem("finalScore");
     
-    // localStorage.setItem("highScores", JSON.stringify(highScores));
 
     const newHighScore = {
         initials: initialInput,
@@ -219,7 +214,6 @@ function saveInput (){
 
     container.innerHTML = " ";
     highScore();
-    // updateHighScores();
 };
 
 function goBack (){
@@ -228,6 +222,8 @@ function goBack (){
 
 
 function highScore (){
+    questionEl.innerHTML = " ";
+
     initialInput = (localStorage.getItem("initials"));
     score =localStorage.getItem("finalScore");
     
@@ -243,11 +239,7 @@ function highScore (){
     
     // var highScoreList = document.createElement("div");
     // highScoreList.textContent = "Initials: " + initialInput + "  score: " + score;
-    // questionEl.appendChild(highScoreList);
-
-    // highScores.sort((a,b) => b.score - a.score);
-
-    // highScoreListSpan.textContent = highScores;
+   
 
     for(i = 0; i < highScores.length; i++) {
     var initialsText = document.createElement("ul");
@@ -259,55 +251,28 @@ function highScore (){
     var highScoreList = document.createElement("div");
     highScoreList.textContent = "Initials: " + highScores[i].initials + "  score: " + highScores[i].score;
     questionEl.appendChild(highScoreList);
-        // highScoreListSpan.textContent = highScores;
-        // highScoreList = highScores[i];
-        // highScoreList.textContent = "Initials: " + highScores[i].initialInput + "  score: " + highScores[i].score;
-        // highScoreList.setAttribute("data-index", i);
-        // questionEl.appendChild(highScoreList);
     };
 
-
     var buttonEl = document.createElement("button");
-    buttonEl.textContent= "Home"
+    buttonEl.textContent= "Home";
     questionEl.appendChild(buttonEl);
     buttonEl.addEventListener("click", goBack);
 
-    var buttonEl = document.createElement("button");
-    buttonEl.textContent= "Clear Score"
-    questionEl.appendChild(buttonEl);
-    buttonEl.addEventListener("click", clearScore);
-
-    
+    // var clearbuttonEl = document.createElement("button");
+    // clearbuttonEl.textContent= "Clear Score";
+    // questionEl.appendChild(clearbuttonEl);
+    // clearbuttonEl.addEventListener("click", clearScore);  (all the sudden my clear score button did not want to work, idk why)
 };
 
 function clearScore (){
-    score = 0;
+    // score = 0;
     localStorage.removeItem("finalScore", finalScore);
     questionEl.innerHTML = " ";
     highScore();
 };
 
-
 viewHighScoresEl.addEventListener("click", saveInput);
 
-function init(){
-    var storedScores = JSON.parse(localStorage.getItem(highScores));
-    if(storedScores !== null){
-        highScores = storedScores
-    }
-}
-
-// function render(){
-//     highScoreList = highScores;
-//     var highScores = JSON.parse(localStorage.getItem(highScores));
-//     highScoreListSpan.textContent = highScores;
-//     for (let i = 0; i < highScores; i++){
-        
-//         var highScoreList = document.createElement("div");
-//         highScoreList.textContent = "Initials: " + highScores[i].initialInput + "  score: " + highScores[i].score;
-//         questionEl.appendChild(highScoreList);
-//     };
-
-// };
-
 startquizBtn.addEventListener("click", startQuiz);
+
+
