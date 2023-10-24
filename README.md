@@ -37,6 +37,6 @@ I needed a lot of help with this assigment. I had the right idea with local stor
 
 ##LINKS##
 
-GitHub - 
+GitHub - https://github.com/Hannahphoto/04-WebAPICodeQuiz-HP
 
-Live -
+Live - https://hannahphoto.github.io/04-WebAPICodeQuiz-HP/
